@@ -11,11 +11,12 @@
 </head>
 <body>
     <div class="login__container">
+        <button class="btn btn-dark" id="return">Voltar</button>
         <div class="text-center">LOGO</div>
         <div class="login__form">
             <div class="toggler">
-                <div class="active">Sign Up</div>
-                <div>Sign In</div>
+                <div class="active" id="signup" onclick="signup()">Sign Up</div>
+                <div id="signin" onclick="signin()">Sign In</div>
             </div>
             <div class="login__formFields">
                 <div class="form-group register">
@@ -30,7 +31,7 @@
                     <label for="passwordInput">Password</label>
                     <input type="password" class="form-control" id="passwordInput" placeholder="Password">
                 </div>
-                <button class="btn btn-primary" onclick="login()">Login</button>
+                <button class="btn btn-primary login" onclick="signIn()">Login</button>
                 <button class="btn btn-primary register" onclick="register()">Register User</button>
                 <button class="btn btn-primary" onclick="facebookLogin()">Facebook</button>
                 <button class="btn btn-primary" onclick="gmailLogin()">Gmail</button>
@@ -39,6 +40,7 @@
     
     </div>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
-  <script type="module" src="../js/service/api.js"></script>
+  <script src="../js/service/api.js"></script>
+  <script src="../js/login.js"></script>
 </body>
 </html>

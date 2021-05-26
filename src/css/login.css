@@ -1,3 +1,9 @@
+#return{
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    max-width: 4rem;
+}
 .login__container{
     display: flex;
     flex-direction: column;
@@ -25,12 +31,21 @@
 
 .toggler > *.active{
     border: 1px solid black;
-    border-collapse: separate;
+    border-bottom: none;
+}
+.toggler > *:not(.active){
+    border-bottom: 1px solid black;
 }
 
 .login__formFields{
+    padding: 1rem;
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
     border: 1px solid black;
+    border-top: none;
+}
+
+.login{
+    display: none;
 }

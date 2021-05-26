@@ -1,3 +1,14 @@
+var currentUser = firebase.auth().currentUser;
+
+async function initialConfig(){
+    firebase.auth.languageCode = 'pt';
+    firebase.auth().onAuthStateChanged((user)=>{
+        currentUser = user;
+    });
+    await firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL);
+}
+
+initialConfig();
 
 function createUser(email, password){
     return firebase.auth().createUserWithEmailAndPassword(email, password);
@@ -5,7 +16,7 @@ function createUser(email, password){
 
 
 function login(email, password){
-    return firebase.auth().loginWithEmailAndPassword(email, password);
+    return firebase.auth().signInWithEmailAndPassword(email, password);
 };
 
 function facebookLogin(){
@@ -22,41 +33,44 @@ function logout(){
     return firebase.auth().signOut();
 };
 
-function currentUser(){
-    firebase.auth().languageCode = 'pt';
-    return firebase.auth().currentUser;
-};
-
 function updateUser(field, newInfo){
-    let user = currentUser();
+    const user = currentUser;
     if(user){
-        let functions = {
-            'profile': user.updateProfile,
-            'email': user.updateEmail,
-            'password': user.updatePassword,
-            'phone': user.updatePhoneNumber
-        };
-        functions[field](newInfo);
+        switch(field){
+            case 'profile':
+                return user.updateProfile(newInfo);
+            case 'email':
+                return user.updateEmail(newInfo);
+            case 'password':
+                return user.updatePassword(newInfo);
+            case 'phone':
+                return user.updatePhoneNumber(newInfo);
+        }
     }
 };
 
 function deleteUser(){
-    let user = currentUser();
+    let user = currentUser;
     if(user){
         return user.delete();
     }
 };
 
 function verifyUser(){
-    let user = currentUser();
+    let user = currentUser;
     if(!user.emailVerified){
         return user.sendEmailVerification();
     }
 };
 
 function recoverPassword(){
-    let user = currentUser();
+    let user = currentUser;
     if(user){
         return firebase.auth().sendPasswordResetEmail(user.email);
     }
 }
+
+function getCurrentUser(){
+    return currentUser;
+}
+
